@@ -1,0 +1,52 @@
+---
+layout: base
+eleventyNavigation:
+  key: Home
+---
+
+<div class="container mx-auto">
+  <div class="flex flex-wrap">
+    {% if collections.recipes %}
+      {% for recipe in collections.recipes %}
+        {% if loop.index == '5' %}
+        <div class="w-full my-4 mx-2 border-4 border-yellow-100">
+            <div class="flex card overflow-hidden relative">
+              <div class="w-full md:w-7/12">
+                <a href="{{ recipe.data.permalink }}">
+                  <div class="card__image">
+                    <img src="https://res.cloudinary.com/hellofresh/image/upload/f_auto,fl_lossy,h_436,q_auto/v1/hellofresh_s3/{{recipe.data.imagePath}}" loading="lazy"/>
+                  </div>
+                </a>
+              </div>
+              <div class="w-full md:w-5/12 p-2">
+                <a href="{{ recipe.data.permalink }}">
+                  <h2 class="font-bold font-serif text-xl">{{ recipe.data.name }}</h2>
+                  <p>{{ recipe.data.description }}</p>
+                </a>
+              </div>
+            </div>
+          </div>
+        {% else %}
+          <div class="w-full md:w-6/12 my-4 px-2">
+            <div class="flex card overflow-hidden relative">
+              <div class="card__image">
+                <a href="{{ recipe.data.permalink }}">
+                  <img src="https://res.cloudinary.com/hellofresh/image/upload/f_auto,fl_lossy,h_436,q_auto/v1/hellofresh_s3/{{recipe.data.imagePath}}" loading="lazy"/>
+                </a>
+              </div>
+                <div class="absolute inset-x-3 bottom-3 px-3 py-5 bg-white card__details">
+                  <a href="{{ recipe.data.permalink }}">
+                    <h2 class="font-bold text-lg font-serif">{{ recipe.data.name }}</h2>
+                    <p>{{ recipe.data.headline }}</p>
+                    {% for tag in recipe.data.tagTitles %}
+                      {{ tag }}
+                    {% endfor %}
+                  </a>
+                </div>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+  </div>
+</div>
